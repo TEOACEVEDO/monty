@@ -7,9 +7,9 @@
  */
 int main(int argc, char **argv)
 {
-    if (argc != 2)
-        error_argv();
+if (argc != 2)
+error_argv();
 
-    open_file(argv);
-    return (0);
+open_file(argv);
+return (0);
 }
