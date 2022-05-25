@@ -25,7 +25,7 @@ void open_file(char **argv)
 	{
 		f = get_op_code(buf, line);
 		if (f == NULL)
-			invalid_instruction(line, strtok(buf, " "));
+				(line, strtok(buf, " "));
 		else
 			f(&stack, line);
 	}

@@ -9,12 +9,18 @@
 void (*get_op_code(char *token, unsigned int line))(stack_t **, unsigned int)
 {
 	int i = 0;
-	char **tokens = NULL;
+	char *tokens = NULL;
+	char *save = NULL;
 
 	tokens = tokenizer(token, "\n\t\r ");
+	save = tokens[0];
 
-	if (tokens[1])
-		glb_number = atoi(tokens[1]);
+	if (isdigit(tokens[1]) > 0 && strcmp(save, "push") == 0)
+	{	
+		printf("L%i: usage: push integer\n", line);
+		exit(EXIT_FAILURE);
+	}
+	glb_number = atoi(tokens[1]);
 
 	for (i = 0; list[i].opcode != NULL; i++)
 	{
@@ -35,14 +41,14 @@ void (*get_op_code(char *token, unsigned int line))(stack_t **, unsigned int)
  * Return: a char double pointer that contains splited words.
  */
 
-char **tokenizer(char *s, char *delim)
+char *tokenizer(char *s, char *delim)
 {
 	int i = 0, cword = 0;
-	char **splitedw = NULL;
+	char *splitedw = NULL;
 
 	cword = countw(s);
 
-	splitedw = malloc(sizeof(char *) * (cword + 1));
+	splitedw = malloc(sizeof(char) * (cword + 1));
 	if (splitedw == NULL)
 	{
 		malloc_error();
